@@ -1,0 +1,43 @@
+# ms-user deployment 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-user-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-user
+  template:
+    metadata:
+      labels:
+        app: ms-user
+        env: prod
+    spec:
+      containers:
+      - name: th-prj-ms-user
+        image: paoloacqua/th-prj-ms-user
+        resources:
+          requests:
+            memory: "460Mi"
+            cpu: "150m"
+          limits:
+            memory: "480Mi"
+            cpu: "160m"
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: "struct1"
+          - name: MySqlIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-user-config
+                key: MySqlIp
+          - name: ZuulIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-user-config
+                key: ZuulIp
+        ports:
+          - name: service
+            containerPort: 8020
+            protocol: TCP

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: th-prj-db-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce # SI CONSENTE LA SCRITTURA AD UN NODO ALLA VOLTA
+  - ReadOnlyMany # SI CONSENTE LA LETTURA A MOLTI NODI ALLA VOLTA
+  persistentVolumeReclaimPolicy: Retain
+  #hostPath:
+  #  path: "/mnt/data"
+  gcePersistentDisk:
+    pdName: th-prj-db
+    fsType: ext4 

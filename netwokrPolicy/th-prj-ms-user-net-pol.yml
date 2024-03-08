@@ -1,0 +1,19 @@
+# ms-user network-policy 
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-traffic-ms-user
+spec:
+  podSelector:
+    matchLabels:
+      app: ms-user
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: zuul
+    - podSelector:
+        matchLabels:
+          app: mysql

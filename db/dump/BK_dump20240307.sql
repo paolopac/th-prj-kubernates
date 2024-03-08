@@ -1,0 +1,548 @@
+CREATE DATABASE  IF NOT EXISTS `tarahumara` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `tarahumara`;
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: tarahumara
+-- ------------------------------------------------------
+-- Server version	8.3.0
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `AN001_USER`
+--
+
+DROP TABLE IF EXISTS `AN001_USER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `AN001_USER` (
+  `AN001_ID` int NOT NULL AUTO_INCREMENT,
+  `AN001_EMAIL` varchar(100) NOT NULL,
+  `AN001_PASSWORD` varchar(400) NOT NULL,
+  `AN001_ID_AN002` int NOT NULL,
+  `AN001_STATO` varchar(1) NOT NULL DEFAULT 'E',
+  `AN001_DATA_CREAZIONE` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `AN001_COD_UTENTE_CREAZIONE` varchar(50) NOT NULL,
+  `AN001_DATA_MODIFICA` datetime(6) DEFAULT NULL,
+  `AN001_COD_UTENTE_MODIFICA` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`AN001_ID`),
+  KEY `AN001_ID_AN002` (`AN001_ID_AN002`),
+  CONSTRAINT `AN001_USER_ibfk_1` FOREIGN KEY (`AN001_ID_AN002`) REFERENCES `AN002_RUOLO` (`AN002_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AN001_USER`
+--
+
+LOCK TABLES `AN001_USER` WRITE;
+/*!40000 ALTER TABLE `AN001_USER` DISABLE KEYS */;
+INSERT INTO `AN001_USER` VALUES (11,'paoloacqua@hotmail.it','$2a$10$8UGZhh5w65djJvKgLhwPpOls27KnfPl1clCjc7uige7AOU0Xx1my2',1,'E','2024-02-29 14:09:09.631000','POSTMAN',NULL,NULL),(12,'pl.acquaviva@gmail.com','$2a$10$oFsT/yS20O1kM3PkXnvtAugfZ2OuOxcrACwMi5Dn5HmTjDOreKs5a',2,'E','2024-02-29 14:25:50.445000','POSTMAN',NULL,NULL);
+/*!40000 ALTER TABLE `AN001_USER` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `AN002_RUOLO`
+--
+
+DROP TABLE IF EXISTS `AN002_RUOLO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `AN002_RUOLO` (
+  `AN002_ID` int NOT NULL AUTO_INCREMENT,
+  `AN002_DESCRIZIONE` varchar(200) NOT NULL,
+  `AN002_COD_RUOLO` varchar(200) NOT NULL,
+  `AN002_DATA_CREAZIONE` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  `AN002_COD_UTENTE_CREAZIONE` varchar(50) NOT NULL,
+  `AN002_STATO` varchar(1) NOT NULL DEFAULT 'E',
+  `AN002_DATA_MODIFICA` datetime(6) DEFAULT NULL,
+  `AN002_COD_UTENTE_MODIFICA` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`AN002_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AN002_RUOLO`
+--
+
+LOCK TABLES `AN002_RUOLO` WRITE;
+/*!40000 ALTER TABLE `AN002_RUOLO` DISABLE KEYS */;
+INSERT INTO `AN002_RUOLO` VALUES (1,'CREATE, INSERT, UPDATE, DELETE, READ','ADMIN','2024-02-29 09:10:46.708860','PA','E',NULL,NULL),(2,'INSERT, UPDATE, READ','SIMPLE_USER','2024-02-29 09:10:46.715572','PA','E',NULL,NULL);
+/*!40000 ALTER TABLE `AN002_RUOLO` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `AN003_ASSOCIATION`
+--
+
+DROP TABLE IF EXISTS `AN003_ASSOCIATION`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `AN003_ASSOCIATION` (
+  `AN003_ID` bigint NOT NULL AUTO_INCREMENT,
+  `AN003_NOME` varchar(40) NOT NULL,
+  `AN003_FIDALID` varchar(10) NOT NULL,
+  `AN003_CF` varchar(16) DEFAULT NULL,
+  `AN003_PIVA` varchar(11) DEFAULT NULL,
+  `AN003_CITTA` varchar(50) NOT NULL,
+  `AN003_INDIRIZZO` varchar(50) NOT NULL,
+  `AN003_CAP` varchar(5) NOT NULL,
+  `AN003_PROVINCIA` varchar(50) NOT NULL,
+  `AN003_TELEFONO` varchar(20) NOT NULL,
+  `AN003_EMAIL` varchar(30) NOT NULL,
+  PRIMARY KEY (`AN003_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AN003_ASSOCIATION`
+--
+
+LOCK TABLES `AN003_ASSOCIATION` WRITE;
+/*!40000 ALTER TABLE `AN003_ASSOCIATION` DISABLE KEYS */;
+INSERT INTO `AN003_ASSOCIATION` VALUES (1,'Happy Runners Altamura','BA703',NULL,'07004700725','Altamura','ViA S. Quasimodo 5','70022','BA','3883483236','paoloacqua@hotmail.it');
+/*!40000 ALTER TABLE `AN003_ASSOCIATION` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `AN004_RUNNER`
+--
+
+DROP TABLE IF EXISTS `AN004_RUNNER`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `AN004_RUNNER` (
+  `AN004_ID` bigint NOT NULL AUTO_INCREMENT,
+  `AN004_NOME` varchar(40) NOT NULL,
+  `AN004_COGNOME` varchar(40) NOT NULL,
+  `AN004_EMAIL` varchar(50) NOT NULL,
+  `AN004_GENERE` enum('m','f') DEFAULT NULL,
+  `AN004_ASSOCIATIONID` int NOT NULL,
+  `AN004_ACCETTAZIONE_PRIVACY_POLICY` tinyint DEFAULT '0',
+  `AN004_ACCETTAZIONE_CONDIZIONI` tinyint NOT NULL DEFAULT '0',
+  `AN004_DATA_CREAZIONE` datetime(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4),
+  `AN004_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `AN004_DATA_MODIFICA` datetime DEFAULT NULL,
+  `AN004_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `AN004_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`AN004_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AN004_RUNNER`
+--
+
+LOCK TABLES `AN004_RUNNER` WRITE;
+/*!40000 ALTER TABLE `AN004_RUNNER` DISABLE KEYS */;
+/*!40000 ALTER TABLE `AN004_RUNNER` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `AN005_TIPO_CANALE`
+--
+
+DROP TABLE IF EXISTS `AN005_TIPO_CANALE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `AN005_TIPO_CANALE` (
+  `AN005_ID` bigint NOT NULL AUTO_INCREMENT,
+  `AN005_COD_TIPO` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `AN005_DESCRIZIONE` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `AN005_DATA_CREAZIONE` datetime(4) DEFAULT CURRENT_TIMESTAMP(4),
+  `AN005_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `AN005_DATA_MODIFICA` datetime(4) DEFAULT NULL,
+  `AN005_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `AN005_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`AN005_ID`),
+  CONSTRAINT `CHK_AN005_STATO` CHECK (((`AN005_STATO` = _utf8mb3'E') or (`AN005_STATO` = _utf8mb3'D')))
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AN005_TIPO_CANALE`
+--
+
+LOCK TABLES `AN005_TIPO_CANALE` WRITE;
+/*!40000 ALTER TABLE `AN005_TIPO_CANALE` DISABLE KEYS */;
+INSERT INTO `AN005_TIPO_CANALE` VALUES (1,'FACEBOOK','social media facebook','2024-02-15 18:51:52.0467','PA',NULL,NULL,'E');
+/*!40000 ALTER TABLE `AN005_TIPO_CANALE` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `CONF001_ACCESS_FACEBOOK`
+--
+
+DROP TABLE IF EXISTS `CONF001_ACCESS_FACEBOOK`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `CONF001_ACCESS_FACEBOOK` (
+  `CONF001_ID` bigint NOT NULL AUTO_INCREMENT,
+  `CONF001_PAGE_ID` char(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `CONF001_LIVED_LONG_PAGE_ACCESS_TOKEN` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `CONF001_ID_AN003` bigint NOT NULL,
+  `CONF001_DATA_CREAZIONE` datetime(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4),
+  `CONF001_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `CONF001_DATA_MODIFICA` datetime(4) DEFAULT NULL,
+  `CONF001_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `CONF001_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`CONF001_ID`),
+  KEY `CONF001_KEY_AN003` (`CONF001_ID_AN003`),
+  CONSTRAINT `CONF001_KEY_AN003` FOREIGN KEY (`CONF001_ID_AN003`) REFERENCES `AN003_ASSOCIATION` (`AN003_ID`),
+  CONSTRAINT `CHK_CONF001_STATO` CHECK (((`CONF001_STATO` = _utf8mb3'E') or (`CONF001_STATO` = _utf8mb3'D')))
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CONF001_ACCESS_FACEBOOK`
+--
+
+LOCK TABLES `CONF001_ACCESS_FACEBOOK` WRITE;
+/*!40000 ALTER TABLE `CONF001_ACCESS_FACEBOOK` DISABLE KEYS */;
+INSERT INTO `CONF001_ACCESS_FACEBOOK` VALUES (1,'607909929299457','EAANsxXHhW1UBOZCH2BZCu1sdnLaFGZAE04cvyCerpiK3pBJJVkGmQiqWIUnxiph6nozKNCZB3vWshswZAKIp73FPAFGRBZAIr58SkhZAwcy5pGidvgkCBZBvIMe4e9VaGSIpGZBe7XA9u1C0l1CBnORygbzahXaW4G51k2cLQZAiGobjAxXj51rqOD4S7a8FpD9TnFNlguDVbXVthC20EH',1,'2024-02-16 09:10:33.8085','PA',NULL,NULL,'E');
+/*!40000 ALTER TABLE `CONF001_ACCESS_FACEBOOK` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MSG001_SCHEDULED`
+--
+
+DROP TABLE IF EXISTS `MSG001_SCHEDULED`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `MSG001_SCHEDULED` (
+  `MSG001_ID` bigint NOT NULL AUTO_INCREMENT,
+  `MSG001_ID_AN003` bigint NOT NULL,
+  `MSG001_ID_MSG003` bigint NOT NULL,
+  `MSG001_ID_AN005` bigint NOT NULL,
+  `MSG001_MERIDIEM` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG001_ORA_INVIO` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG001_GIORNO_INVIO` varchar(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG001_SETTIMANA_INVIO` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG001_MESE_INVIO` varchar(48) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG001_DATA_SPECIFICA_INVIO` datetime DEFAULT NULL,
+  `MSG001_DATA_CREAZIONE` datetime(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4),
+  `MSG001_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `MSG001_DATA_MODIFICA` datetime(4) DEFAULT NULL,
+  `MSG001_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG001_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`MSG001_ID`),
+  KEY `MSG001_KEY_AN003` (`MSG001_ID_AN003`),
+  KEY `MSG001_KEY_MSG003` (`MSG001_ID_MSG003`),
+  KEY `MSG001_KEY_AN005` (`MSG001_ID_AN005`),
+  CONSTRAINT `MSG001_KEY_AN003` FOREIGN KEY (`MSG001_ID_AN003`) REFERENCES `AN003_ASSOCIATION` (`AN003_ID`),
+  CONSTRAINT `MSG001_KEY_AN005` FOREIGN KEY (`MSG001_ID_AN005`) REFERENCES `AN005_TIPO_CANALE` (`AN005_ID`),
+  CONSTRAINT `MSG001_KEY_MSG003` FOREIGN KEY (`MSG001_ID_MSG003`) REFERENCES `MSG003_TIPO_CONTENUTO` (`MSG003_ID`),
+  CONSTRAINT `CHK_GIORNO_INVIO` CHECK (((`MSG001_GIORNO_INVIO` = _utf8mb3'LUN') or (`MSG001_GIORNO_INVIO` = _utf8mb3'MAR') or (`MSG001_GIORNO_INVIO` = _utf8mb3'MER') or (`MSG001_GIORNO_INVIO` = _utf8mb3'GIO') or (`MSG001_GIORNO_INVIO` = _utf8mb3'VEN') or (`MSG001_GIORNO_INVIO` = _utf8mb3'SAB') or (`MSG001_GIORNO_INVIO` = _utf8mb3'DOM'))),
+  CONSTRAINT `CHK_MERIDIEM` CHECK (((`MSG001_MERIDIEM` = _utf8mb3'AM') or (`MSG001_MERIDIEM` = _utf8mb3'PM'))),
+  CONSTRAINT `CHK_MESE_INVIO` CHECK (((`MSG001_MESE_INVIO` like _utf8mb3'GEN%') or (`MSG001_MESE_INVIO` like _utf8mb3'%FEB%') or (`MSG001_MESE_INVIO` like _utf8mb3'%MAR%') or (`MSG001_MESE_INVIO` like _utf8mb3'%APR%') or (`MSG001_MESE_INVIO` like _utf8mb3'%MAG%') or (`MSG001_MESE_INVIO` like _utf8mb3'%GIU%') or (`MSG001_MESE_INVIO` like _utf8mb3'%LUG%') or (`MSG001_MESE_INVIO` like _utf8mb3'%AGO%') or (`MSG001_MESE_INVIO` like _utf8mb3'%SET%') or (`MSG001_MESE_INVIO` like _utf8mb3'OTT%') or (`MSG001_MESE_INVIO` like _utf8mb3'%NOV%') or (`MSG001_MESE_INVIO` like _utf8mb3'%DIC%'))),
+  CONSTRAINT `CHK_MSG001_STATO` CHECK (((`MSG001_STATO` = _utf8mb3'E') or (`MSG001_STATO` = _utf8mb3'D'))),
+  CONSTRAINT `CHK_ORA_INVIO` CHECK (((`MSG001_ORA_INVIO` = _utf8mb3'01') or (`MSG001_ORA_INVIO` = _utf8mb3'02') or (`MSG001_ORA_INVIO` = _utf8mb3'03') or (`MSG001_ORA_INVIO` = _utf8mb3'04') or (`MSG001_ORA_INVIO` = _utf8mb3'05') or (`MSG001_ORA_INVIO` = _utf8mb3'06') or (`MSG001_ORA_INVIO` = _utf8mb3'07') or (`MSG001_ORA_INVIO` = _utf8mb3'08') or (`MSG001_ORA_INVIO` = _utf8mb3'09') or (`MSG001_ORA_INVIO` = _utf8mb3'10') or (`MSG001_ORA_INVIO` = _utf8mb3'11') or (`MSG001_ORA_INVIO` = _utf8mb3'12'))),
+  CONSTRAINT `CHK_SETTIMANA_INVIO` CHECK (((`MSG001_SETTIMANA_INVIO` = _utf8mb4'ALL') or (`MSG001_SETTIMANA_INVIO` = _utf8mb4'FIRST') or (`MSG001_SETTIMANA_INVIO` = _utf8mb4'LAST') or (`MSG001_SETTIMANA_INVIO` = _utf8mb4'MIDDLE')))
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MSG001_SCHEDULED`
+--
+
+LOCK TABLES `MSG001_SCHEDULED` WRITE;
+/*!40000 ALTER TABLE `MSG001_SCHEDULED` DISABLE KEYS */;
+INSERT INTO `MSG001_SCHEDULED` VALUES (1,1,1,1,'PM','08','LUN','MIDDLE','MAR,APR,MAG,GIU,SET,OTT,NOV,DIC',NULL,'2024-02-21 16:05:33.0241','PA',NULL,NULL,'E'),(2,1,3,1,'PM','08','SAB','FIRST','GEN,FEB,MAR,APR,MAG,GIU,LUG,AGO,SET,OTT,NOV,DIC',NULL,'2024-02-21 16:05:33.0529','PA',NULL,NULL,'E'),(3,1,4,1,NULL,NULL,NULL,NULL,NULL,'2024-12-25 10:00:00','2024-02-21 16:05:33.0640','PA',NULL,NULL,'E'),(15,1,2,1,NULL,NULL,NULL,NULL,NULL,'2024-02-27 20:00:00','2024-02-26 11:39:04.8234','PA',NULL,NULL,'E'),(22,1,6,1,NULL,NULL,NULL,NULL,NULL,'2025-01-01 10:00:00','2024-02-27 09:45:07.1817','PA',NULL,NULL,'E'),(23,1,8,1,NULL,NULL,NULL,NULL,NULL,'2024-03-31 10:00:00','2024-02-27 09:47:12.2195','PA',NULL,NULL,'E'),(25,1,2,1,'PM','08','DOM','MIDDLE','GEN,FEB,MAR,APR,MAG,GIU,LUG,AGO,SET,OTT,NOV,DIC',NULL,'2024-02-27 13:40:04.6181','PA',NULL,NULL,'E');
+/*!40000 ALTER TABLE `MSG001_SCHEDULED` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MSG002_PROMPT_CHAT_GPT`
+--
+
+DROP TABLE IF EXISTS `MSG002_PROMPT_CHAT_GPT`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `MSG002_PROMPT_CHAT_GPT` (
+  `MSG002_ID` bigint NOT NULL AUTO_INCREMENT,
+  `MSG002_PROMPT` varchar(600) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `MSG002_ID_MSG003` bigint NOT NULL,
+  `MSG002_ID_AN005` bigint NOT NULL,
+  `MSG002_ID_AN003` bigint NOT NULL,
+  `MSG002_DATA_UTILIZZO` datetime(4) DEFAULT NULL,
+  `MSG002_DATA_CREAZIONE` datetime(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4),
+  `MSG002_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `MSG002_DATA_MODIFICA` datetime(4) DEFAULT NULL,
+  `MSG002_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG002_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`MSG002_ID`),
+  KEY `MSG002_KEY_AN003` (`MSG002_ID_AN003`),
+  KEY `MSG002_KEY_AN005` (`MSG002_ID_AN005`),
+  KEY `MSG002_KEY_MSG003` (`MSG002_ID_MSG003`),
+  CONSTRAINT `MSG002_KEY_AN003` FOREIGN KEY (`MSG002_ID_AN003`) REFERENCES `AN003_ASSOCIATION` (`AN003_ID`),
+  CONSTRAINT `MSG002_KEY_AN005` FOREIGN KEY (`MSG002_ID_AN005`) REFERENCES `AN005_TIPO_CANALE` (`AN005_ID`),
+  CONSTRAINT `MSG002_KEY_MSG003` FOREIGN KEY (`MSG002_ID_MSG003`) REFERENCES `MSG003_TIPO_CONTENUTO` (`MSG003_ID`),
+  CONSTRAINT `CHK_MSG002_STATO` CHECK (((`MSG002_STATO` = _utf8mb3'E') or (`MSG002_STATO` = _utf8mb3'D')))
+) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MSG002_PROMPT_CHAT_GPT`
+--
+
+LOCK TABLES `MSG002_PROMPT_CHAT_GPT` WRITE;
+/*!40000 ALTER TABLE `MSG002_PROMPT_CHAT_GPT` DISABLE KEYS */;
+INSERT INTO `MSG002_PROMPT_CHAT_GPT` VALUES (1,'Scrivi un post facebook che pubblicizzi il campionato regionale Corripuglia, formato da gare di 10km o halfmarathon per le vie delle città più belle della regione. Entrando in happy runners si hanno sconti e agevolazioni nel partecipare oltre a poter gareggiare con centinaia di atleti',1,1,1,NULL,'2024-02-22 10:47:53.9389','PA',NULL,NULL,'E'),(2,'Scrivi un post Instagram che pubblicizzi il campionato regionale FIDAL della regione Puglia dal nome CorriPuglia. Il campionato prevede diverse tappe per le vittà più belle della regione. Le gare sono 10km o half marathon è aperta a tutti gli appassionati e amatori, ognuno con i propri tempi. Entrando in happy runers si hanno agevolazioni per la partecipazione alle gare.',1,1,1,NULL,'2024-02-22 10:49:10.7386','PA',NULL,NULL,'E'),(3,'Scrivi un post Instagram che pubblicizzi il campionato regionale FIDAL CorriPuglia, che prevede gare di 10km e mette maratone per le città più belle della regione, tra cui anche la città di Altamura. Entrando in happy runners si ha modo di partecipare alle gare con agevolazioni e si ha modo di correre assieme a centinaia di altri atleti.',1,1,1,NULL,'2024-02-22 10:49:10.7546','PA',NULL,NULL,'E'),(4,'Hi',5,1,1,NULL,'2024-02-22 16:37:06.6566','PA',NULL,NULL,'E'),(127,'Scrivi un post facebook che incita l\'attività della corsa, anche con aforismi e che inviti ad iscriversi alla happy runners Altamura.',3,1,1,NULL,'2024-02-27 18:55:22.6277','PA',NULL,NULL,'E'),(128,'Scrivi un post facebook che inciti la corsa con aforismi sulla bellezza della corsa e che inviti ad iscriversi alla happy runners Altamura',3,1,1,NULL,'2024-02-27 18:55:22.6335','PA',NULL,NULL,'E'),(129,'Scrivi un post facebook che promuova la corsa e l\'iscrizione alla happy runners Altamura, informando che sono previsti vantaggi per la partecipazione alle gare regionali FIDAL per gli iscritti',3,1,1,NULL,'2024-02-27 18:55:22.6389','PA',NULL,NULL,'E'),(130,'Scrivi un post Facebook di incitamento alla corsa anche con aforismi. Grazie',2,1,1,NULL,'2024-02-27 18:55:22.6452','PA',NULL,NULL,'E'),(131,'Scrivi un post Facebook di promuova la corsa, che evidenzi gli aspetti positivi e sani. Grazie',2,1,1,NULL,'2024-02-27 18:55:22.6496','PA',NULL,NULL,'E'),(132,'Scrivi un post Facebook che promuova la corsa, che evidenzi gli aspetti positivi, sani e il benessere. Grazie',2,1,1,NULL,'2024-02-27 18:55:22.6551','PA',NULL,NULL,'E'),(133,'Scrivi un post Facebook di auguri natalizio per gli iscritti alla happy runners altamura e tutti gli utenti della pagina facebook happy runnes altamura',4,1,1,NULL,'2024-02-27 18:55:22.6599','PA',NULL,NULL,'E'),(134,'Scrivi un post Facebook di auguri Pasquale per gli iscritti alla happy runners altamura e tutti gli utenti della pagina facebook e instagram happy runnes altamura',8,1,1,NULL,'2024-02-27 18:55:22.6649','PA',NULL,NULL,'E'),(135,'Scrivi un post Facebook di auguri per il nuovo anno, senza scrivere il nome dell\'anno, per gli iscritti alla happy runners altamura e tutti gli utenti della pagina facebook e instagram happy runnes altamura. Grazie',6,1,1,NULL,'2024-02-27 18:55:22.6703','PA',NULL,NULL,'E');
+/*!40000 ALTER TABLE `MSG002_PROMPT_CHAT_GPT` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MSG003_TIPO_CONTENUTO`
+--
+
+DROP TABLE IF EXISTS `MSG003_TIPO_CONTENUTO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `MSG003_TIPO_CONTENUTO` (
+  `MSG003_ID` bigint NOT NULL AUTO_INCREMENT,
+  `MSG003_COD_TIPO` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `MSG003_DESCRIZIONE` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `MSG003_DATA_CREAZIONE` datetime(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4),
+  `MSG003_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `MSG003_DATA_MODIFICA` datetime(4) DEFAULT NULL,
+  `MSG003_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG003_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`MSG003_ID`),
+  CONSTRAINT `CHK_MSG003_STATO` CHECK (((`MSG003_STATO` = _utf8mb3'E') or (`MSG003_STATO` = _utf8mb3'D')))
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MSG003_TIPO_CONTENUTO`
+--
+
+LOCK TABLES `MSG003_TIPO_CONTENUTO` WRITE;
+/*!40000 ALTER TABLE `MSG003_TIPO_CONTENUTO` DISABLE KEYS */;
+INSERT INTO `MSG003_TIPO_CONTENUTO` VALUES (1,'PBL_CAMP_REG_CORRIPUGLIA','Contenuto di pubblicizzazione campionato regionale Corripuglia','2024-02-16 09:21:44.4967','PA',NULL,NULL,'E'),(2,'INCITAMENTO','Contenuto di incitamento alla corsa','2024-02-16 09:21:44.5063','PA',NULL,NULL,'E'),(3,'PBL_ASS_INT','Contenuto pubblicitario società','2024-02-21 15:15:23.8384','PA',NULL,NULL,'E'),(4,'AUG_NAT','Auguri Natale','2024-02-21 15:23:05.0903','PA',NULL,NULL,'E'),(5,'TEST','Contenuto adibito a soli test','2024-02-22 16:33:25.1591','PA',NULL,NULL,'E'),(6,'AUG_CAP','Auguri capodanno','2024-02-27 09:40:39.2242','PA',NULL,NULL,'E'),(8,'AUG_PAS','Auguri pasqua','2024-02-27 09:41:36.0562','PA',NULL,NULL,'E');
+/*!40000 ALTER TABLE `MSG003_TIPO_CONTENUTO` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MSG004_STATO_INVIO`
+--
+
+DROP TABLE IF EXISTS `MSG004_STATO_INVIO`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `MSG004_STATO_INVIO` (
+  `MSG004_ID` bigint NOT NULL AUTO_INCREMENT,
+  `MSG004_COD_TIPO` varchar(50) NOT NULL,
+  `MSG004_DESCRIZIONE` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `MSG004_DATA_CREAZIONE` datetime(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4),
+  `MSG004_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `MSG004_DATA_MODIFICA` datetime(4) DEFAULT NULL,
+  `MSG004_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG004_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`MSG004_ID`),
+  CONSTRAINT `CHK_MSG004_STATO` CHECK (((`MSG004_STATO` = _utf8mb3'E') or (`MSG004_STATO` = _utf8mb3'D')))
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MSG004_STATO_INVIO`
+--
+
+LOCK TABLES `MSG004_STATO_INVIO` WRITE;
+/*!40000 ALTER TABLE `MSG004_STATO_INVIO` DISABLE KEYS */;
+INSERT INTO `MSG004_STATO_INVIO` VALUES (1,'TO_SEND','il messaggio è necessario sia inviato','2024-02-15 19:13:52.3329','PA',NULL,NULL,'E'),(2,'IN_PROGRESS','invio del messaggio in corso','2024-02-15 19:13:52.3393','PA',NULL,NULL,'E'),(3,'SENDED','messaggio inviato correttamente','2024-02-15 19:13:52.3436','PA',NULL,NULL,'E'),(4,'FAIL','impossibile inviare il messaggio','2024-02-15 19:13:52.3483','PA',NULL,NULL,'E');
+/*!40000 ALTER TABLE `MSG004_STATO_INVIO` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MSG005_CONTEXTUAL_IMG`
+--
+
+DROP TABLE IF EXISTS `MSG005_CONTEXTUAL_IMG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `MSG005_CONTEXTUAL_IMG` (
+  `MSG005_ID` bigint NOT NULL AUTO_INCREMENT,
+  `MSG005_ID_MSG003` bigint NOT NULL,
+  `MSG005_ID_AN005` bigint NOT NULL,
+  `MSG005_ID_AN003` bigint NOT NULL,
+  `MSG005_DATA_CREAZIONE` datetime(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4),
+  `MSG005_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `MSG005_DATA_MODIFICA` datetime(4) DEFAULT NULL,
+  `MSG005_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG005_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`MSG005_ID`),
+  KEY `MSG005_KEY_AN003` (`MSG005_ID_AN003`),
+  KEY `MSG005_KEY_AN005` (`MSG005_ID_AN005`),
+  KEY `MSG005_KEY_MSG003` (`MSG005_ID_MSG003`),
+  CONSTRAINT `MSG005_KEY_AN003` FOREIGN KEY (`MSG005_ID_AN003`) REFERENCES `AN003_ASSOCIATION` (`AN003_ID`),
+  CONSTRAINT `MSG005_KEY_AN005` FOREIGN KEY (`MSG005_ID_AN005`) REFERENCES `AN005_TIPO_CANALE` (`AN005_ID`),
+  CONSTRAINT `MSG005_KEY_MSG003` FOREIGN KEY (`MSG005_ID_MSG003`) REFERENCES `MSG003_TIPO_CONTENUTO` (`MSG003_ID`),
+  CONSTRAINT `CHK_MSG005_STATO` CHECK (((`MSG005_STATO` = _utf8mb3'E') or (`MSG005_STATO` = _utf8mb3'D')))
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MSG005_CONTEXTUAL_IMG`
+--
+
+LOCK TABLES `MSG005_CONTEXTUAL_IMG` WRITE;
+/*!40000 ALTER TABLE `MSG005_CONTEXTUAL_IMG` DISABLE KEYS */;
+INSERT INTO `MSG005_CONTEXTUAL_IMG` VALUES (1,5,1,1,'2024-02-26 14:15:31.3030','PA',NULL,NULL,'E'),(51,1,1,1,'2024-02-27 16:53:47.1433','PA',NULL,NULL,'E'),(52,2,1,1,'2024-02-27 16:55:31.6294','PA',NULL,NULL,'E'),(53,3,1,1,'2024-02-27 16:55:31.6435','PA',NULL,NULL,'E'),(54,4,1,1,'2024-02-27 16:55:31.6481','PA',NULL,NULL,'E'),(55,6,1,1,'2024-02-27 16:55:31.6527','PA',NULL,NULL,'E'),(56,8,1,1,'2024-02-27 16:55:31.6577','PA',NULL,NULL,'E');
+/*!40000 ALTER TABLE `MSG005_CONTEXTUAL_IMG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `MSG006_URL_CONTEXTUAL_IMG`
+--
+
+DROP TABLE IF EXISTS `MSG006_URL_CONTEXTUAL_IMG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `MSG006_URL_CONTEXTUAL_IMG` (
+  `MSG006_ID` bigint NOT NULL AUTO_INCREMENT,
+  `MSG006_URL` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `MSG006_ID_MSG005` bigint NOT NULL,
+  `MSG006_DATA_UTILIZZO` datetime(4) DEFAULT NULL,
+  `MSG006_DATA_CREAZIONE` datetime(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4),
+  `MSG006_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `MSG006_DATA_MODIFICA` datetime(4) DEFAULT NULL,
+  `MSG006_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `MSG006_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`MSG006_ID`),
+  KEY `MSG006_KEY_MSG005` (`MSG006_ID_MSG005`),
+  CONSTRAINT `MSG006_KEY_MSG005` FOREIGN KEY (`MSG006_ID_MSG005`) REFERENCES `MSG005_CONTEXTUAL_IMG` (`MSG005_ID`),
+  CONSTRAINT `CHK_MSG006_STATO` CHECK (((`MSG006_STATO` = _utf8mb3'E') or (`MSG006_STATO` = _utf8mb3'D')))
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `MSG006_URL_CONTEXTUAL_IMG`
+--
+
+LOCK TABLES `MSG006_URL_CONTEXTUAL_IMG` WRITE;
+/*!40000 ALTER TABLE `MSG006_URL_CONTEXTUAL_IMG` DISABLE KEYS */;
+INSERT INTO `MSG006_URL_CONTEXTUAL_IMG` VALUES (1,'https://media.foundit.hk/career-advice/wp-content/uploads/2021/08/1509963788.jpg',1,NULL,'2024-02-26 14:19:51.9694','PA',NULL,NULL,'E'),(77,'https://media.foundit.hk/career-advice/wp-content/uploads/2021/08/1509963788.jpg',55,NULL,'2024-02-27 19:04:21.7164','PA',NULL,NULL,'E'),(78,'https://media.foundit.hk/career-advice/wp-content/uploads/2021/08/1509963788.jpg',52,NULL,'2024-02-27 19:05:15.3399','PA',NULL,NULL,'E');
+/*!40000 ALTER TABLE `MSG006_URL_CONTEXTUAL_IMG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `PR002_INVIO_MSG`
+--
+
+DROP TABLE IF EXISTS `PR002_INVIO_MSG`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `PR002_INVIO_MSG` (
+  `PR002_ID` bigint NOT NULL AUTO_INCREMENT,
+  `PR002_ID_AN003` bigint NOT NULL,
+  `PR002_ID_MSG003` bigint NOT NULL,
+  `PR002_ID_AN005` bigint NOT NULL,
+  `PR002_ID_MSG004` bigint NOT NULL,
+  `PR002_DATA_ULTIMO_INVIO` datetime(4) DEFAULT NULL,
+  `PR002_NUM_TENTATIVI` int NOT NULL DEFAULT '0',
+  `PR002_DATA_CREAZIONE` datetime(4) NOT NULL DEFAULT CURRENT_TIMESTAMP(4),
+  `PR002_COD_UTENTE_CREAZIONE` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'PA',
+  `PR002_DATA_MODIFICA` datetime(4) DEFAULT NULL,
+  `PR002_COD_UTENTE_MODIFICA` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `PR002_STATO` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'E',
+  PRIMARY KEY (`PR002_ID`),
+  KEY `PR002_KEY_AN003` (`PR002_ID_AN003`),
+  KEY `PR002_KEY_MSG003` (`PR002_ID_MSG003`),
+  KEY `PR002_KEY_AN005` (`PR002_ID_AN005`),
+  KEY `PR002_KEY_MSG004` (`PR002_ID_MSG004`),
+  CONSTRAINT `PR002_KEY_AN003` FOREIGN KEY (`PR002_ID_AN003`) REFERENCES `AN003_ASSOCIATION` (`AN003_ID`),
+  CONSTRAINT `PR002_KEY_AN005` FOREIGN KEY (`PR002_ID_AN005`) REFERENCES `AN005_TIPO_CANALE` (`AN005_ID`),
+  CONSTRAINT `PR002_KEY_MSG003` FOREIGN KEY (`PR002_ID_MSG003`) REFERENCES `MSG003_TIPO_CONTENUTO` (`MSG003_ID`),
+  CONSTRAINT `PR002_KEY_MSG004` FOREIGN KEY (`PR002_ID_MSG004`) REFERENCES `MSG004_STATO_INVIO` (`MSG004_ID`),
+  CONSTRAINT `CHK_PR002_STATO` CHECK (((`PR002_STATO` = _utf8mb3'E') or (`PR002_STATO` = _utf8mb3'D')))
+) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `PR002_INVIO_MSG`
+--
+
+LOCK TABLES `PR002_INVIO_MSG` WRITE;
+/*!40000 ALTER TABLE `PR002_INVIO_MSG` DISABLE KEYS */;
+/*!40000 ALTER TABLE `PR002_INVIO_MSG` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `performance`
+--
+
+DROP TABLE IF EXISTS `performance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `performance` (
+  `ID` bigint NOT NULL AUTO_INCREMENT,
+  `POINTS` mediumtext NOT NULL,
+  `TYPE` varchar(10) NOT NULL,
+  `DISTANCE` int NOT NULL,
+  `DURATION` bigint NOT NULL,
+  `STARTDATE` datetime NOT NULL,
+  `FINISHDATE` datetime NOT NULL,
+  `RUNNINGID` int NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `RUNNINGS_KEY_PERFORMANCES` (`RUNNINGID`),
+  CONSTRAINT `RUNNINGS_KEY_PERFORMANCES` FOREIGN KEY (`RUNNINGID`) REFERENCES `runnings` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `performance`
+--
+
+LOCK TABLES `performance` WRITE;
+/*!40000 ALTER TABLE `performance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `performance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `runnings`
+--
+
+DROP TABLE IF EXISTS `runnings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `runnings` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `ORGINALFILENAME` varchar(50) NOT NULL,
+  `FILENAME` varchar(50) NOT NULL,
+  `ASSOCIATIONID` int NOT NULL,
+  `RUNNERID` int NOT NULL,
+  `FOLDERNAME` varchar(30) NOT NULL,
+  `CREATEDDATE` datetime NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `runnings`
+--
+
+LOCK TABLES `runnings` WRITE;
+/*!40000 ALTER TABLE `runnings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `runnings` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-03-07 16:25:18

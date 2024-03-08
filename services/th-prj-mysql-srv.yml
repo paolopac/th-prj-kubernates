@@ -1,0 +1,15 @@
+#MySql service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-gke-service
+  labels: 
+    srv: mysql-gke-service
+    env: prod
+spec:
+  type: NodePort
+  ports:
+  - port: 3306 
+  selector:
+    app: mysql

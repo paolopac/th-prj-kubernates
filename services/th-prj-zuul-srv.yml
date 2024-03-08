@@ -1,0 +1,14 @@
+#LoadBalancer type service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: zuul-gke-service
+spec: 
+  loadBalancerIP: 34.68.27.236 # sostituire con IP esterno genereato la cui label associata risulta zuul-gke-service-static-ip
+  type: LoadBalancer
+  ports:
+  - port: 8120
+    targetPort: 8120
+  selector:
+    app: zuul

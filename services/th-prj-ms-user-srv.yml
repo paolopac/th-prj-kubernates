@@ -1,0 +1,19 @@
+# associations LoadBalancer type service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-user-gke-service
+  labels: 
+    srv: ms-user-gke-service
+    env: prod
+spec:
+  loadBalancerIP: 34.171.68.118 # sostituire con IP esterno genereato la cui label associata risulta ms-user-gke-service-static-ip
+  type: LoadBalancer
+  ports:
+    - port: 8020
+      targetPort: 8020
+  selector:
+    app: ms-user
+  #loadBalancerSourceRanges:
+  #  - "35.224.6.145/32" # Si valorizzi con la subnetmask dell'ip statico presente all'interno della variabie zuul-gke-service-static-ip

@@ -1,0 +1,42 @@
+# Mysql deployment 
+# POD: mysql
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+        env: prod
+    spec:
+      containers:
+      - image: mysql:5.7.24
+        name: mysql
+        args:
+          - "--ignore-db-dir=lost+found"
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: 20210821Ta!
+        resources:
+          requests:
+            memory: "450Mi"
+            cpu: "150m"
+          limits:
+            memory: "460Mi"
+            cpu: "1600m"
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+      volumes:
+      - name: mysql-data
+        persistentVolumeClaim:
+          claimName: th-prj-db-pvc

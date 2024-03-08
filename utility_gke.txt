@@ -1,0 +1,30 @@
+# RIMOZIONE DEPLOYMENT
+kubectl delete deployment <nome-del-deployment>
+
+# RIMOZIONE DI UN CLUSTER
+gcloud container clusters delete <nome-del-cluster>
+
+# RIMOZIONE NETWORK POLICIES
+kubectl delete networkpolicy <nome> -n default
+
+# SCALE CLUSTER
+gcloud container clusters resize <nome_cluster> --node-pool <node_pool_name> --num-nodes <num> --zone <zone> 
+Es.
+gcloud container clusters resize base-prj-20240117-cls --node-pool default-pool --num-nodes 1 --zone us-central1-c 
+
+
+# GET LOG DATO POD
+kubectl logs -f <nome-del-pod>
+
+# GET IP STATICI
+gcloud compute addresses list
+
+# GET DETAIL SERVICE
+kubectl get svc <nome-service> -o yaml
+
+# GET NODE_POOL_NAME 
+gcloud container node-pools list --cluster <nome_cluster> --zone <nome_zona>
+
+# GET NETWORK POLICIES 
+kubectl get NetworkPolicy
+

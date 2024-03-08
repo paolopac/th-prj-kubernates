@@ -1,0 +1,41 @@
+# ZUUL deployment 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zuul-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zuul
+  template:
+    metadata:
+      labels:
+        app: zuul
+        env: prod
+    spec:
+      containers:
+      - name: ms-zuul
+        image: paoloacqua/th-prj-ms-zuul
+        resources:
+          requests:
+            memory: "400Mi"
+            cpu: "150m"
+          limits:
+            memory: "450Mi"
+            cpu: "160m"
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            valueFrom:
+              configMapKeyRef:
+                name: ms-zuul-config
+                key: springProfile
+          - name: MsUserIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-zuul-config
+                key: MsUserIp  
+        ports:
+          - name: service
+            containerPort: 8120
+            protocol: TCP
