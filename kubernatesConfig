@@ -106,8 +106,8 @@
 # # ************* CREAZIONE SERVICE DB *************
 # kubectl create -f services/th-prj-mysql-srv.yml
 
-# # ************* CREAZIONE CONFIG MAP MS-ZUUL ************* 
-# kubectl create configmap ms-zuul-config --from-literal=springProfile=struct1 --from-literal=MsUserIp=ms-user-gke-service
+# # ************* CREAZIONE CONFIG MAP MS-ZUUL *************                                                                                                                          
+# kubectl create configmap ms-zuul-config --from-literal=springProfile=struct1 --from-literal=MsUserIp=ms-user-gke-service --from-literal=MsAssociationsIp=ms-associations-gke-service --from-literal=MsRunnersIp=ms-runners-gke-service --from-literal=MsRunningsIp=ms-runnings-gke-service
 # # ************* CREAZIONE DEPLOYMENT MS-ZUUL *************
 # kubectl create -f deployments/th-prj-zuul-dep.yml
 # # ************* CREAZIONE SERVICE MS-ZUUL *************
@@ -136,11 +136,72 @@
 # gcloud compute addresses create ms-user-gke-service-static-ip --region=${REGION}
 # Es.
 # gcloud compute addresses create ms-user-gke-service-static-ip --region=us-central1
+#
+# Si estragga la lista degli IP generati attraverso il comando: 
+# gcloud compute addresses list
+#
 # 2. Sostituire, all'interno dell'user-srv:
 # la proprietà loadBalancerIP. Si valorizzi tale proprietà con l'IP genereato
 # --- > TO TEST la proprietà loadBalancerSourceRanges con la subnetmask degli ip statici presenti all'interno della variabie: zuul-kube-service-static-ip, runners-kube-service-static-ip. Tale configurazione limita l'accesso al kube-service.
 # 3. Si crei l'instanza ms-user-gke-service
 # kubectl create -f services/th-prj-ms-user-srv.yml
+
+# # ************* CREAZIONE CONFIG MAP MS-ASSOCIATIONS *************
+# kubectl create configmap ms-associations-config --from-literal=springProfile=zone1 --from-literal=MySqlIp=mysql-gke-service --from-literal=ZuulIp=zuul-gke-service
+# # ************* CREAZIONE DEPLOYMENT ASSOCIATIONS *************
+# kubectl create -f deployments/th-prj-ms-associations-dep.yml
+# # ************* CREAZIONE SERVICE ASSOCIATIONS *************
+# 1. Creazione external static IP
+# REGION=$(gcloud config get-value compute/region)
+# gcloud compute addresses create associations-kube-service-static-ip --region=${REGION}
+# Es.
+# gcloud compute addresses create associations-kube-service-static-ip --region=us-central1
+#
+# Si estragga la lista degli IP generati attraverso il comando: 
+# gcloud compute addresses list
+# 2. Sostituire, all'interno dell'associations-srv:
+# la proprietà loadBalancerIP. Si valorizzi tale proprietà con l'IP genereato
+# TO TEST----> la proprietà loadBalancerSourceRanges con la subnetmask degli ip statici presenti all'interno della variabie: zuul-kube-service-static-ip, runners-kube-service-static-ip. Tale configurazione limita l'accesso al kube-service.
+# 3. Si crei l'instanza associations-service
+# kubectl create -f services/th-prj-ms-associations-srv.yml
+
+# # ************* CREAZIONE CONFIG MAP MS-RUNNERS *************
+# kubectl create configmap ms-runners-config --from-literal=springProfile=zone1 --from-literal=MySqlIp=mysql-gke-service --from-literal=ZuulIp=zuul-gke-service 
+# # ************* CREAZIONE DEPLOYMENT MS-RUNNERS *************
+# kubectl create -f deployments/th-prj-ms-runners-dep.yml
+# # ************* CREAZIONE SERVICE MS-RUNNERS *************
+# 1. Creazione external static IP
+# REGION=$(gcloud config get-value compute/region)
+# gcloud compute addresses create runners-kube-service-static-ip --region=${REGION}
+# Es.
+# gcloud compute addresses create runners-kube-service-static-ip --region=us-central1
+#
+# Si estragga la lista degli IP generati attraverso il comando: 
+# gcloud compute addresses list
+# 2. Sostituire, all'interno dell'runners-srv:
+# la proprietà loadBalancerIP. Si valorizzi tale proprietà con l'IP genereato
+# TO TEST----> la proprietà loadBalancerSourceRanges con la subnetmask degli ip statici presenti all'interno della variabie: zuul-kube-service-static-ip, runners-kube-service-static-ip. Tale configurazione limita l'accesso al kube-service.
+# 3. Si crei l'instanza associations-service
+# kubectl create -f services/th-prj-ms-runners-srv.yml
+
+# # ************* CREAZIONE CONFIG MAP MS-RUNNINGS *************
+# kubectl create configmap ms-runnings-config --from-literal=springProfile=zone1 --from-literal=MySqlIp=mysql-gke-service --from-literal=ZuulIp=zuul-gke-service 
+# # ************* CREAZIONE DEPLOYMENT MS-RUNNINGS *************
+# kubectl create -f deployments/th-prj-ms-runnings-dep.yml
+# # ************* CREAZIONE SERVICE MS-RUNNINGS *************
+# 1. Creazione external static IP
+# REGION=$(gcloud config get-value compute/region)
+# gcloud compute addresses create runnings-kube-service-static-ip --region=${REGION}
+# Es.
+# gcloud compute addresses create runnings-kube-service-static-ip  --region=us-central1
+#
+# Si estragga la lista degli IP generati attraverso il comando: 
+# gcloud compute addresses list
+# 2. Sostituire, all'interno dell'runners-srv:
+# la proprietà loadBalancerIP. Si valorizzi tale proprietà con l'IP genereato
+# TO TEST----> la proprietà loadBalancerSourceRanges con la subnetmask degli ip statici presenti all'interno della variabie: zuul-kube-service-static-ip, runners-kube-service-static-ip. Tale configurazione limita l'accesso al kube-service.
+# 3. Si crei l'instanza associations-service
+# kubectl create -f services/th-prj-ms-runnings-srv.yml
 
 # # ********** APPLICAZIONE NETWORK POLICIES **********
 # Si abilitano le network policies al POD ms-user

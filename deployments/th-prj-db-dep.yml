@@ -16,10 +16,8 @@ spec:
         env: prod
     spec:
       containers:
-      - image: mysql:5.7.24
+      - image: mysql:8.0.30@sha256:eeabfa5cd6a2091bf35eb9eae6ae48aab8231fd760f5a61cd0129df454333b1d
         name: mysql
-        args:
-          - "--ignore-db-dir=lost+found"
         env:
           - name: MYSQL_ROOT_PASSWORD
             value: 20210821Ta!
@@ -29,7 +27,7 @@ spec:
             cpu: "150m"
           limits:
             memory: "460Mi"
-            cpu: "1600m"
+            cpu: "160m"
         volumeMounts:
         - name: mysql-data
           mountPath: /var/lib/mysql

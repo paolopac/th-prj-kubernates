@@ -1,5 +1,4 @@
-#MySql service
-
+#LoadBalancer type service
 apiVersion: v1
 kind: Service
 metadata:

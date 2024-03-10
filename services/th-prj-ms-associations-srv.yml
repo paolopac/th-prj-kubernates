@@ -1,0 +1,18 @@
+#LoadBalancer type service
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-associations-gke-service
+  labels: 
+    srv: ms-associations-gke-service
+    env: prod
+spec:
+  loadBalancerIP: 35.238.106.14 # sostituire con IP esterno genereato la cui label associata risulta associations-kube-service-static-ip
+  type: LoadBalancer
+  ports:
+    - port: 5093
+      targetPort: 5093
+  selector:
+    app: ms-associations
+  #loadBalancerSourceRanges:
+  #  - "35.233.0.0/16" # Si valorizzi con la subnetmask dell'ip statico presente all'interno della variabie zuul-kube-service-static-ip e runners-kube-service-static-ip

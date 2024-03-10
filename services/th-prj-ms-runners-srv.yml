@@ -1,0 +1,18 @@
+#LoadBalancer type service
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-runners-gke-service
+  labels: 
+    srv: ms-runners-gke-service
+    env: prod
+spec:
+  loadBalancerIP: 34.173.31.222 # sostituire con IP esterno genereato la cui label associata risulta runners-kube-service-static-ip
+  type: LoadBalancer
+  ports:
+    - port: 5083
+      targetPort: 5083
+  selector:
+    app: ms-runners
+  #loadBalancerSourceRanges:
+  #  - "104.196.0.0/16" # Si valorizzi con la subnetmask dell'ip statico presente all'interno delle variabili zuul-kube-service-static-ip

@@ -1,0 +1,46 @@
+# ms-runnings deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-runnings-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-runnings
+  template:
+    metadata:
+      labels:
+        app: ms-runnings
+        env: prod
+    spec:
+      containers:
+      - name: th-prj-ms-runnings
+        image: paoloacqua/th-prj-ms-runnings:0.5.1
+        resources:
+          requests:
+            memory: "2000Mi"
+            cpu: "320m"
+          limits:
+            memory: "2100Mi"
+            cpu: "330m"
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            valueFrom:
+              configMapKeyRef:
+                name: ms-runnings-config
+                key: springProfile     
+          - name: MySqlIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-runnings-config
+                key: MySqlIp
+          - name: ZuulIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-runnings-config
+                key: ZuulIp
+        ports:
+          - name: service
+            containerPort: 5073
+            protocol: TCP

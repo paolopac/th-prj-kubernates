@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: ms-zuul
-        image: paoloacqua/th-prj-ms-zuul
+        image: paoloacqua/th-prj-ms-zuul:0.2.0
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "400Mi"
@@ -35,6 +36,21 @@ spec:
               configMapKeyRef:
                 name: ms-zuul-config
                 key: MsUserIp  
+          - name: MsAssociationsIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-zuul-config
+                key: MsAssociationsIp  
+          - name: MsRunnersIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-zuul-config
+                key: MsRunnersIp  
+          - name: MsRunningsIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-zuul-config
+                key: MsRunningsIp  
         ports:
           - name: service
             containerPort: 8120

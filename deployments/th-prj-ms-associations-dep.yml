@@ -1,0 +1,43 @@
+# ms-associations deployment 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-associations-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-associations
+  template:
+    metadata:
+      labels:
+        app: ms-associations
+        env: prod
+    spec:
+      containers:
+      - name: th-prj-ms-associations
+        image: paoloacqua/th-prj-ms-associations
+        resources:
+          requests:
+              memory: "400Mi"
+              cpu: "100m"
+          limits:
+              memory: "410Mi"
+              cpu: "110m"
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: "zone1"
+          - name: MySqlIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-associations-config
+                key: MySqlIp
+          - name: ZuulIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-associations-config
+                key: ZuulIp
+        ports:
+          - name: service
+            containerPort: 5093
+            protocol: TCP

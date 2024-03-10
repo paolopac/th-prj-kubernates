@@ -1,0 +1,46 @@
+# ms-runners deployment 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-runners-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-runners
+  template:
+    metadata:
+      labels:
+        app: ms-runners
+        env: prod
+    spec:
+      containers:
+      - name: th-prj-ms-runners
+        image: paoloacqua/th-prj-ms-runners
+        resources:
+          requests:
+            memory: "400Mi"
+            cpu: "100m"
+          limits:
+            memory: "410Mi"
+            cpu: "110m"
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            valueFrom:
+              configMapKeyRef:
+                name: ms-runners-config
+                key: springProfile     
+          - name: MySqlIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-runners-config
+                key: MySqlIp
+          - name: ZuulIp
+            valueFrom:
+              configMapKeyRef:
+                name: ms-runners-config
+                key: ZuulIp
+        ports:
+          - name: service
+            containerPort: 5083
+            protocol: TCP
