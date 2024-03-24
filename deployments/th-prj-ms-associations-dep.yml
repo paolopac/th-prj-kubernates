@@ -20,10 +20,10 @@ spec:
         resources:
           requests:
               memory: "400Mi"
-              cpu: "100m"
+              cpu: "80m"
           limits:
               memory: "410Mi"
-              cpu: "110m"
+              cpu: "90m"
         env:
           - name: SPRING_PROFILES_ACTIVE
             value: "zone1"

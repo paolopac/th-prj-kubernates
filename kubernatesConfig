@@ -203,6 +203,11 @@
 # 3. Si crei l'instanza associations-service
 # kubectl create -f services/th-prj-ms-runnings-srv.yml
 
+# # ************* CREAZIONE CONFIG MAP MS-MESSAGING *************
+# kubectl create configmap ms-messaging-config --from-literal=springProfile=struct1 --from-literal=MySqlIp=mysql-gke-service 
+# # ************* CREAZIONE DEPLOYMENT MS-MESSAGING *************
+# kubectl create -f deployments/th-prj-ms-messaging-dep.yml
+
 # # ********** APPLICAZIONE NETWORK POLICIES **********
 # Si abilitano le network policies al POD ms-user
 # kubectl apply -f netwokrPolicy/ms-user-net-pol.yml 

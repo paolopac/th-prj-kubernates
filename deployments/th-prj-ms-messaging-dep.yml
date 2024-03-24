@@ -2,28 +2,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ms-runners-deployment
+  name: ms-messaging-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ms-runners
+      app: ms-messaging
   template:
     metadata:
       labels:
-        app: ms-runners
+        app: ms-messaging
         env: prod
     spec:
       containers:
-      - name: th-prj-ms-runners
-        image: paoloacqua/th-prj-ms-runners
+      - name: th-prj-ms-messaging
+        image: paoloacqua/th-prj-ms-messaging:0.0.1
         resources:
           requests:
             memory: "400Mi"
-            cpu: "70m"
+            cpu: "80m"
           limits:
             memory: "410Mi"
-            cpu: "80m"
+            cpu: "90m"
         env:
           - name: SPRING_PROFILES_ACTIVE
             valueFrom:
@@ -35,12 +35,7 @@ spec:
               configMapKeyRef:
                 name: ms-runners-config
                 key: MySqlIp
-          - name: ZuulIp
-            valueFrom:
-              configMapKeyRef:
-                name: ms-runners-config
-                key: ZuulIp
         ports:
           - name: service
-            containerPort: 5083
+            containerPort: 5063
             protocol: TCP
