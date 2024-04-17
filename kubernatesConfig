@@ -1,6 +1,9 @@
 # Necesario si installi gcloud
 # Necesario si installi kubectl
 
+# SI ABILITI KUBECTL AFFINCHE' ACCEDA AL CLUSTER DELL'ACCOUNT LOGGATO
+# https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl?hl=it
+# gcloud container clusters get-credentials th-prj-20240229-cls --region=us-central1-c
 
 # CREAZIONE NUOVO PROGETTO:
 # gcloud projects create project_name
@@ -76,7 +79,7 @@
 
 # SI VERIFICHI IL QUANTITATIVO DI CPU E MEMORIA A DISPOSIZIONE 
 # PER DIMENSIONARE COSI' IN MODO CORRETTO I POD. SI VERIFICHINO QUINDI LE PROPERTY Allocatable:  cpu: E memory:
-# SI CONSIDERI INOLTRE 1core = 1000millicores = 1000m
+# SI CONSIDERI INOLTRE 1core = 1000millico  res = 1000m
 # kubectl describe nodes
 
 # # ************* CREAZIONE POD DB *************

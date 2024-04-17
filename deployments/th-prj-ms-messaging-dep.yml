@@ -19,10 +19,10 @@ spec:
         image: paoloacqua/th-prj-ms-messaging:0.0.1
         resources:
           requests:
-            memory: "400Mi"
+            memory: "350Mi"
             cpu: "80m"
           limits:
-            memory: "410Mi"
+            memory: "360Mi"
             cpu: "90m"
         env:
           - name: SPRING_PROFILES_ACTIVE
